@@ -26,7 +26,7 @@ export default function Header({ title }: HeaderProps) {
             alt="User Profile" 
             className="w-8 h-8 rounded-full object-cover"
           />
-          <span className="text-sm font-medium text-gray-700">John Smith</span>
+          <span className="text-sm font-medium text-gray-700">sahil shaikh</span>
         </div>
       </div>
     </header>
