@@ -48,7 +48,16 @@ export default function Sidebar({ activeView, onViewChange, onCreatePost }: Side
         ))}
         
         <div className="pt-6 border-t border-gray-200 mt-6">
-          <button className="w-full flex items-center space-x-3 px-4 py-3 text-left rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-700 transition-all">
+          <button 
+            onClick={() => onViewChange('settings')}
+            className={cn(
+              "w-full flex items-center space-x-3 px-4 py-3 text-left rounded-lg transition-all",
+              activeView === 'settings'
+                ? "bg-blue-50 text-primary border-r-2 border-primary"
+                : "text-gray-600 hover:bg-gray-50 hover:text-gray-700"
+            )}
+            data-testid="button-settings"
+          >
             <Settings className="w-5 h-5" />
             <span>Settings</span>
           </button>

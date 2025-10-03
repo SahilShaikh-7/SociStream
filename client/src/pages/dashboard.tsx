@@ -9,6 +9,7 @@ import ContentCalendar from "@/components/calendar/content-calendar";
 import AnalyticsOverview from "@/components/analytics/analytics-overview";
 import ContentLibrary from "@/components/library/content-library";
 import TemplateGallery from "@/components/templates/template-gallery";
+import SettingsPage from "@/components/settings/settings-page";
 import CreatePostModal from "@/components/modals/create-post-modal";
 
 export default function Dashboard() {
@@ -33,6 +34,8 @@ export default function Dashboard() {
         return <ContentLibrary />;
       case "templates":
         return <TemplateGallery />;
+      case "settings":
+        return <SettingsPage />;
       default:
         return (
           <div className="p-6">
@@ -50,7 +53,8 @@ export default function Dashboard() {
       calendar: "Content Calendar",
       analytics: "Analytics",
       library: "Content Library",
-      templates: "Post Templates"
+      templates: "Post Templates",
+      settings: "Settings"
     };
     return titles[activeView as keyof typeof titles] || "Dashboard";
   };
