@@ -35,7 +35,7 @@ export default function Header({ title }: HeaderProps) {
         {/* User Profile */}
         <div className="flex items-center space-x-3">
           <img 
-            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&h=100" 
+            src="https://cdn-icons-png.flaticon.com/512/149/149071.png?v=2" 
             alt="User Profile" 
             className="w-8 h-8 rounded-full object-cover"
           />
