@@ -75,6 +75,27 @@ export default function CreatePostModal({ isOpen, onClose }: CreatePostModalProp
     }
   };
 
+  const handleSaveDraft = () => {
+    if (!title.trim() || !content.trim()) {
+      toast({
+        title: "Validation Error",
+        description: "Please fill in title and content to save as draft.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const postData = {
+      title: title.trim(),
+      content: content.trim(),
+      platforms: selectedPlatforms.length > 0 ? selectedPlatforms : ["facebook"],
+      status: "draft",
+      scheduledFor: null,
+    };
+
+    createPostMutation.mutate(postData);
+  };
+
   const handleSubmit = () => {
     if (!title.trim() || !content.trim() || selectedPlatforms.length === 0) {
       toast({
@@ -103,9 +124,9 @@ export default function CreatePostModal({ isOpen, onClose }: CreatePostModalProp
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-900">
         <DialogHeader>
-          <DialogTitle className="flex items-center justify-between">
+          <DialogTitle className="flex items-center justify-between text-gray-900 dark:text-white">
             Create New Post
             <Button variant="ghost" size="sm" onClick={handleClose}>
               <X className="w-4 h-4" />
@@ -116,11 +137,12 @@ export default function CreatePostModal({ isOpen, onClose }: CreatePostModalProp
         <div className="space-y-6">
           {/* Post Title */}
           <div>
-            <Label htmlFor="title" className="text-sm font-medium text-gray-700">
+            <Label htmlFor="title" className="text-sm font-medium text-gray-700 dark:text-gray-300">
               Post Title
             </Label>
             <Input
               id="title"
+              data-testid="input-post-title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter a title for your post"
@@ -130,7 +152,7 @@ export default function CreatePostModal({ isOpen, onClose }: CreatePostModalProp
 
           {/* Platform Selection */}
           <div>
-            <Label className="text-sm font-medium text-gray-700 mb-3 block">
+            <Label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3 block">
               Select Platforms
             </Label>
             <div className="flex flex-wrap gap-3">
@@ -138,6 +160,7 @@ export default function CreatePostModal({ isOpen, onClose }: CreatePostModalProp
                 <div key={platform.id} className="flex items-center space-x-2">
                   <Checkbox
                     id={platform.id}
+                    data-testid={`checkbox-platform-${platform.id}`}
                     checked={selectedPlatforms.includes(platform.id)}
                     onCheckedChange={(checked) => handlePlatformChange(platform.id, checked as boolean)}
                   />
@@ -152,11 +175,12 @@ export default function CreatePostModal({ isOpen, onClose }: CreatePostModalProp
 
           {/* Content Input */}
           <div>
-            <Label htmlFor="content" className="text-sm font-medium text-gray-700">
+            <Label htmlFor="content" className="text-sm font-medium text-gray-700 dark:text-gray-300">
               Post Content
             </Label>
             <Textarea
               id="content"
+              data-testid="input-post-content"
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder="What do you want to share with your audience?"
@@ -172,10 +196,10 @@ export default function CreatePostModal({ isOpen, onClose }: CreatePostModalProp
 
           {/* Media Upload */}
           <div>
-            <Label className="text-sm font-medium text-gray-700 mb-2 block">
+            <Label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 block">
               Add Media
             </Label>
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer">
+            <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer">
               <CloudUpload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
               <p className="text-sm text-gray-600">
                 Drag and drop files here or{" "}
@@ -189,7 +213,7 @@ export default function CreatePostModal({ isOpen, onClose }: CreatePostModalProp
 
           {/* Publishing Options */}
           <div>
-            <Label className="text-sm font-medium text-gray-700 mb-3 block">
+            <Label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3 block">
               Publishing Options
             </Label>
             <RadioGroup value={publishOption} onValueChange={setPublishOption}>
@@ -227,13 +251,16 @@ export default function CreatePostModal({ isOpen, onClose }: CreatePostModalProp
               Cancel
             </Button>
             <Button 
-              variant="outline" 
-              disabled={!title.trim() || !content.trim()}
+              variant="outline"
+              onClick={handleSaveDraft}
+              data-testid="button-save-draft"
+              disabled={createPostMutation.isPending || !title.trim() || !content.trim()}
             >
-              Save as Draft
+              {createPostMutation.isPending ? "Saving..." : "Save as Draft"}
             </Button>
             <Button 
               onClick={handleSubmit}
+              data-testid="button-publish-post"
               disabled={createPostMutation.isPending || !title.trim() || !content.trim() || selectedPlatforms.length === 0}
             >
               {createPostMutation.isPending 
