@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Sidebar from "@/components/sidebar";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 import StatsCards from "@/components/dashboard/stats-cards";
 import Charts from "@/components/dashboard/charts";
 import RecentPosts from "@/components/dashboard/recent-posts";
@@ -66,6 +67,7 @@ export default function Dashboard() {
         <main className="flex-1 overflow-y-auto bg-gray-50">
           {renderActiveView()}
         </main>
+        <Footer />
       </div>
       
       <CreatePostModal 
