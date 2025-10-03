@@ -88,11 +88,11 @@ export default function ContentCalendar() {
 
   return (
     <div className="p-6">
-      <Card className="shadow-sm border border-gray-200">
+      <Card className="shadow-sm border border-gray-200 dark:border-gray-700">
         <CardContent className="p-6">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-4">
-              <h3 className="text-lg font-semibold text-gray-900">Content Calendar</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Content Calendar</h3>
               <div className="flex items-center space-x-2">
                 <Button
                   variant={viewMode === 'week' ? 'default' : 'outline'}
@@ -114,7 +114,7 @@ export default function ContentCalendar() {
               <Button variant="ghost" size="sm" onClick={() => navigateMonth('prev')}>
                 <ChevronLeft className="w-4 h-4" />
               </Button>
-              <span className="text-lg font-medium text-gray-900 min-w-[140px] text-center">
+              <span className="text-lg font-medium text-gray-900 dark:text-white min-w-[140px] text-center">
                 {monthName}
               </span>
               <Button variant="ghost" size="sm" onClick={() => navigateMonth('next')}>
@@ -124,10 +124,10 @@ export default function ContentCalendar() {
           </div>
 
           {/* Calendar Grid */}
-          <div className="grid grid-cols-7 gap-px bg-gray-200 rounded-lg overflow-hidden">
+          <div className="grid grid-cols-7 gap-px bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden">
             {/* Calendar Headers */}
             {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-              <div key={day} className="bg-gray-50 p-3 text-center text-sm font-medium text-gray-700">
+              <div key={day} className="bg-gray-50 dark:bg-gray-800 p-3 text-center text-sm font-medium text-gray-700 dark:text-gray-300">
                 {day}
               </div>
             ))}
@@ -137,10 +137,10 @@ export default function ContentCalendar() {
               const dayPosts = getPostsForDay(day);
               
               return (
-                <div key={index} className="bg-white min-h-24 p-2">
+                <div key={index} className="bg-white dark:bg-gray-900 min-h-24 p-2">
                   {day && (
                     <>
-                      <div className="text-sm text-gray-700 mb-1">{day}</div>
+                      <div className="text-sm text-gray-700 dark:text-gray-300 mb-1">{day}</div>
                       <div className="space-y-1">
                         {dayPosts.slice(0, 2).map((post) => {
                           const PlatformIcon = platformIcons[post.platforms[0] as keyof typeof platformIcons];
@@ -160,7 +160,7 @@ export default function ContentCalendar() {
                           );
                         })}
                         {dayPosts.length > 2 && (
-                          <div className="text-xs text-gray-500 px-2">
+                          <div className="text-xs text-gray-500 dark:text-gray-400 px-2">
                             +{dayPosts.length - 2} more
                           </div>
                         )}
@@ -173,21 +173,21 @@ export default function ContentCalendar() {
           </div>
 
           {/* Legend */}
-          <div className="mt-6 flex flex-wrap gap-4 text-sm">
+          <div className="mt-6 flex flex-wrap gap-4 text-sm text-gray-700 dark:text-gray-300">
             <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-blue-100 rounded"></div>
+              <div className="w-3 h-3 bg-blue-100 dark:bg-blue-900 rounded"></div>
               <span>Facebook</span>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-pink-100 rounded"></div>
+              <div className="w-3 h-3 bg-pink-100 dark:bg-pink-900 rounded"></div>
               <span>Instagram</span>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-blue-600 rounded"></div>
+              <div className="w-3 h-3 bg-blue-600 dark:bg-blue-700 rounded"></div>
               <span>LinkedIn</span>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-green-100 rounded"></div>
+              <div className="w-3 h-3 bg-green-100 dark:bg-green-900 rounded"></div>
               <span>Twitter</span>
             </div>
           </div>

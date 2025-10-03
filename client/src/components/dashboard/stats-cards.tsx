@@ -63,12 +63,12 @@ export default function StatsCards() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
       {statsData.map((stat, index) => (
-        <Card key={index} className="shadow-sm border border-gray-200">
+        <Card key={index} className="shadow-sm border border-gray-200 dark:border-gray-700">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">{stat.title}</p>
-                <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-300">{stat.title}</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-white">{stat.value}</p>
                 <p className={`text-sm ${
                   stat.changeType === 'positive' ? 'text-accent' : 
                   stat.changeType === 'negative' ? 'text-warning' : 
@@ -77,7 +77,7 @@ export default function StatsCards() {
                   {stat.change}
                 </p>
               </div>
-              <div className={`w-12 h-12 ${stat.iconBg} rounded-lg flex items-center justify-center`}>
+              <div className={`w-12 h-12 ${stat.iconBg} dark:bg-opacity-20 rounded-lg flex items-center justify-center`}>
                 <stat.icon className={`${stat.iconColor} text-lg`} />
               </div>
             </div>

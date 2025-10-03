@@ -101,7 +101,7 @@ export default function ContentLibrary() {
   return (
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">Content Library</h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Content Library</h3>
         <div className="flex items-center space-x-4">
           <div className="relative">
             <Input
@@ -111,7 +111,7 @@ export default function ContentLibrary() {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10 pr-4 py-2 w-64"
             />
-            <Search className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
+            <Search className="absolute left-3 top-3 w-4 h-4 text-gray-400 dark:text-gray-500" />
           </div>
           <div>
             <input
@@ -131,18 +131,18 @@ export default function ContentLibrary() {
         </div>
       </div>
 
-      <Card className="shadow-sm border border-gray-200">
+      <Card className="shadow-sm border border-gray-200 dark:border-gray-700">
         <CardContent className="p-6">
           {isLoading ? (
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="aspect-square bg-gray-200 rounded-lg animate-pulse"></div>
+                <div key={i} className="aspect-square bg-gray-200 dark:bg-gray-700 rounded-lg animate-pulse"></div>
               ))}
             </div>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {filteredItems.map((item) => (
-                <div key={item.id} className="group relative aspect-square bg-gray-100 rounded-lg overflow-hidden hover:shadow-lg transition-all cursor-pointer">
+                <div key={item.id} className="group relative aspect-square bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden hover:shadow-lg transition-all cursor-pointer">
                   <img 
                     src={item.url} 
                     alt={item.originalName}
@@ -168,9 +168,9 @@ export default function ContentLibrary() {
           
           {filteredItems.length === 0 && !isLoading && (
             <div className="text-center py-12">
-              <Upload className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No media files found</h3>
-              <p className="text-gray-500 mb-4">Upload your first media file to get started</p>
+              <Upload className="w-16 h-16 mx-auto text-gray-400 dark:text-gray-600 mb-4" />
+              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No media files found</h3>
+              <p className="text-gray-500 dark:text-gray-400 mb-4">Upload your first media file to get started</p>
               <div>
                 <input
                   type="file"

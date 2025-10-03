@@ -59,18 +59,18 @@ export default function RecentPosts() {
   };
 
   return (
-    <Card className="shadow-sm border border-gray-200">
+    <Card className="shadow-sm border border-gray-200 dark:border-gray-700">
       <CardHeader>
-        <CardTitle className="text-lg font-semibold text-gray-900">Recent Posts</CardTitle>
+        <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">Recent Posts</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="divide-y divide-gray-200">
+        <div className="divide-y divide-gray-200 dark:divide-gray-700">
           {recentPosts.map((post) => {
             const PlatformIcon = platformIcons[post.platforms[0] as keyof typeof platformIcons];
             const platformColor = platformColors[post.platforms[0] as keyof typeof platformColors];
             
             return (
-              <div key={post.id} className="py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+              <div key={post.id} className="py-4 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
                 <div className="flex items-center space-x-4">
                   {post.mediaUrl ? (
                     <img 
@@ -79,13 +79,13 @@ export default function RecentPosts() {
                       className="w-12 h-12 rounded-lg object-cover"
                     />
                   ) : (
-                    <div className="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
-                      <Share className="w-6 h-6 text-gray-400" />
+                    <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                      <Share className="w-6 h-6 text-gray-400 dark:text-gray-500" />
                     </div>
                   )}
                   <div>
-                    <h4 className="font-medium text-gray-900">{post.title}</h4>
-                    <div className="flex items-center space-x-3 text-sm text-gray-500 mt-1">
+                    <h4 className="font-medium text-gray-900 dark:text-white">{post.title}</h4>
+                    <div className="flex items-center space-x-3 text-sm text-gray-500 dark:text-gray-400 mt-1">
                       <span className="flex items-center">
                         {PlatformIcon && <PlatformIcon className={`mr-1 ${platformColor}`} />}
                         {post.platforms[0].charAt(0).toUpperCase() + post.platforms[0].slice(1)}
@@ -94,7 +94,7 @@ export default function RecentPosts() {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center space-x-6 text-sm text-gray-500">
+                <div className="flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
                   <span className="flex items-center">
                     <Heart className="w-4 h-4 text-red-500 mr-1" />
                     {post.engagementStats.likes}

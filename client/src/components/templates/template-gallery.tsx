@@ -95,7 +95,7 @@ export default function TemplateGallery() {
   return (
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">Post Templates</h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Post Templates</h3>
         <Button>
           <Plus className="w-4 h-4 mr-2" />
           Create Template
@@ -131,15 +131,15 @@ export default function TemplateGallery() {
           ))
         ) : (
           filteredTemplates.map((template) => (
-            <Card key={template.id} className="shadow-sm border border-gray-200 hover:shadow-lg transition-shadow">
+            <Card key={template.id} className="shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
               <CardContent className="p-4">
                 <img 
                   src={template.imageUrl} 
                   alt={template.name}
                   className="w-full h-32 object-cover rounded-lg mb-4"
                 />
-                <h4 className="font-semibold text-gray-900 mb-2">{template.name}</h4>
-                <p className="text-sm text-gray-600 mb-4 line-clamp-2">{template.description}</p>
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">{template.name}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">{template.description}</p>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     {template.platforms.slice(0, 3).map(platform => {
@@ -150,10 +150,10 @@ export default function TemplateGallery() {
                       );
                     })}
                     {template.platforms.length > 3 && (
-                      <span className="text-xs text-gray-500">+{template.platforms.length - 3}</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">+{template.platforms.length - 3}</span>
                     )}
                   </div>
-                  <Button variant="ghost" size="sm" className="text-primary hover:text-blue-700">
+                  <Button variant="ghost" size="sm" className="text-primary hover:text-blue-700 dark:hover:text-blue-400">
                     Use Template
                   </Button>
                 </div>
@@ -165,9 +165,9 @@ export default function TemplateGallery() {
 
       {filteredTemplates.length === 0 && !isLoading && (
         <div className="text-center py-12">
-          <Layers className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-          <h3 className="text-lg font-medium text-gray-900 mb-2">No templates found</h3>
-          <p className="text-gray-500 mb-4">
+          <Layers className="w-16 h-16 mx-auto text-gray-400 dark:text-gray-600 mb-4" />
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No templates found</h3>
+          <p className="text-gray-500 dark:text-gray-400 mb-4">
             {activeCategory === 'all' 
               ? 'Create your first template to get started'
               : `No templates found in the ${activeCategory} category`
