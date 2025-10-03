@@ -4,11 +4,44 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from "recharts";
 import { SiFacebook, SiInstagram, SiLinkedin, SiX } from "react-icons/si";
+import { Download } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function AnalyticsOverview() {
+  const { toast } = useToast();
   const { data: analytics } = useQuery({
     queryKey: ["/api/analytics"],
   });
+
+  const exportReport = () => {
+    const csvContent = [
+      ['Platform', 'Followers', 'Engagement Rate', 'Change'],
+      ...platformStats.map(p => [p.platform, p.followers, p.engagement, p.change]),
+      [],
+      ['Post Performance'],
+      ['Month', 'Reach', 'Impressions'],
+      ...performanceData.map(d => [d.name, d.reach, d.impressions]),
+      [],
+      ['Follower Growth'],
+      ['Week', 'Followers'],
+      ...followerData.map(d => [d.name, d.followers])
+    ].map(row => row.join(',')).join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `analytics-report-${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    toast({
+      title: "Report Exported",
+      description: "Your analytics report has been downloaded successfully.",
+    });
+  };
 
   // Process follower growth data
   const followerData = [
@@ -88,7 +121,10 @@ export default function AnalyticsOverview() {
                   <SelectItem value="3months">Last 3 months</SelectItem>
                 </SelectContent>
               </Select>
-              <Button>Export Report</Button>
+              <Button onClick={exportReport} data-testid="button-export-report">
+                <Download className="w-4 h-4 mr-2" />
+                Export Report
+              </Button>
             </div>
           </div>
         </CardContent>
